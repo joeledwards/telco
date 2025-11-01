@@ -1,7 +1,7 @@
-import * as basic from "./basic";
-import * as extended from "./extended";
+import * as basic from "./encodings/basic";
+import * as extended from "./encodings/extended";
 import * as file from "./file";
-import * as hex from "./hex";
+import * as hex from "./encodings/hex";
 import { CDRRecord } from "./record";
 
 const encodings = { basic, extended, hex };
