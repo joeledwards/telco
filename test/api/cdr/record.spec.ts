@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { CDRRecord } from "../../src/cdr";
+import { CDRRecord } from "../../../src/cdr";
 
 describe("Record", () => {
   it("builds instances with the provided values", () => {

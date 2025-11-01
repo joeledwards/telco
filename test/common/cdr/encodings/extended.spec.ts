@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
-import extended from "../../../src/cdr/encodings/extended";
-import { CDRRecord } from "../../../src/cdr/record";
+import extended from "../../../../src/api/cdr/encodings/extended";
+import { CDRRecord } from "../../../../src/common/cdr";
 
 describe("extended encoding stubs", () => {
   it("returns undefined for decode until implemented", () => {

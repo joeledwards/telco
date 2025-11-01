@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
-import basic from "../../../src/cdr/encodings/basic";
-import { CDRRecord } from "../../../src/cdr/record";
+import basic from "../../../../src/api/cdr/encodings/basic";
+import { CDRRecord } from "../../../../src/common/cdr";
 
 describe("basic encoding stubs", () => {
   it("returns undefined for decode until implemented", () => {

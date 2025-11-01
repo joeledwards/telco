@@ -1,9 +1,3 @@
-import * as basic from "./encodings/basic";
-import * as extended from "./encodings/extended";
-import * as file from "./file";
-import * as hex from "./encodings/hex";
-import { CDRRecord } from "./record";
-
-const encodings = { basic, extended, hex };
-
-export { encodings, file, CDRRecord };
+export { CDRRecord } from "../common/cdr";
+export { default as encodings, basic, extended, hex } from "../api/cdr/encodings";
+export * as file from "../api/cdr/file";

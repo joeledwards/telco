@@ -1,13 +1,14 @@
-import { CDRRecord } from "../record";
+import { CDRRecord } from "../../../common/cdr";
 
 function decode(line: string): CDRRecord | undefined {
   // TODO decode logic
-  return undefined
+  return undefined;
 }
 
 function encode(record: CDRRecord): string | undefined {
   // TODO encode logic
-  return undefined
+  return undefined;
 }
 
-export default { decode, encode }
+export { decode, encode };
+export default { decode, encode };

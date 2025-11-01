@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
-import hex from "../../../src/cdr/encodings/hex";
-import { CDRRecord } from "../../../src/cdr/record";
+import hex from "../../../../src/api/cdr/encodings/hex";
+import { CDRRecord } from "../../../../src/common/cdr";
 
 describe("hex encoding stubs", () => {
   it("returns undefined for decode until implemented", () => {
