@@ -4,13 +4,13 @@ import basic from "../../../../src/api/cdr/encodings/basic";
 import { CDRRecord } from "../../../../src/common/cdr";
 
 describe("basic encoding stubs", () => {
-  it("returns undefined for decode until implemented", () => {
+  it("returns the record for valid text", () => {
+    const record = new CDRRecord(42, 1024, 33, "meh", 22, "1.1.1.1");
+    expect(basic.encode(record)).toBe("42,1024");
+  });
+
+  it("returns undefined for invalid text", () => {
     expect(basic.decode("some raw line")).toBeUndefined();
   });
 
-  it("returns undefined for encode until implemented", () => {
-    const record = new CDRRecord(42, 1024);
-
-    expect(basic.encode(record)).toBeUndefined();
-  });
 });
