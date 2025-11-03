@@ -8,8 +8,16 @@
   </head>
   <body>
     <header>
-      <h1>CDR Upload and Preview</h1>
-      <p>Select a call detail record file to parse and preview its contents.</p>
+      <div class="header-content">
+        <div>
+          <h1>CDR Upload and Preview</h1>
+          <p>Select a call detail record file to parse and preview its contents.</p>
+        </div>
+        <nav class="primary-nav">
+          <a href="/" class="active">Upload</a>
+          <a href="/search.html">Search</a>
+        </nav>
+      </div>
     </header>
 
     <main>
@@ -28,9 +36,12 @@
         <h2>Parsed Records</h2>
         <div class="summary">
           <p><strong>File:</strong> <span id="result-file"></span></p>
+          <p><strong>File ID:</strong> <span id="result-file-id"></span></p>
+          <p><strong>Uploaded at:</strong> <span id="result-uploaded"></span></p>
           <p><strong>Total lines:</strong> <span id="result-lines"></span></p>
           <p><strong>Parsed records:</strong> <span id="result-count"></span></p>
-          <p><strong>Unparsed lines:</strong> <span id="result-errors"></span></p>
+          <p><strong>Skipped lines:</strong> <span id="result-skipped"></span></p>
+          <p><strong>Invalid records:</strong> <span id="result-errors"></span></p>
         </div>
 
         <div id="records-container" class="table-wrapper"></div>

@@ -26,10 +26,12 @@
   "author": "Joel Edwards <joeledwards@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "byline": "^5.0.0"
+    "byline": "^5.0.0",
+    "pg": "^8.16.3"
   },
   "devDependencies": {
     "@types/node": "^24.9.2",
+    "@types/pg": "^8.15.6",
     "@vitest/coverage-v8": "^4.0.6",
     "typescript": "^5.6.3",
     "vitest": "^4.0.6"

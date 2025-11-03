@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
-import hex from "../../../../src/api/cdr/encodings/hex";
-import { CDRRecord } from "../../../../src/common/cdr";
+import hex from "../../../../src/server/cdr/encodings/hex";
+import { CDRRecord } from "../../../../src/server/cdr";
 
 describe("hex encoding stubs", () => {
   it("returns the record for a valid line", () => {

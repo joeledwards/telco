@@ -4,7 +4,10 @@ const statusEl = document.getElementById("status");
 const resultsSection = document.getElementById("results");
 const fileNameEl = document.getElementById("result-file");
 const totalLinesEl = document.getElementById("result-lines");
+const fileIdEl = document.getElementById("result-file-id");
+const uploadedAtEl = document.getElementById("result-uploaded");
 const recordCountEl = document.getElementById("result-count");
+const skippedLinesEl = document.getElementById("result-skipped");
 const errorCountEl = document.getElementById("result-errors");
 const recordsContainer = document.getElementById("records-container");
 const errorsContainer = document.getElementById("errors-container");
@@ -22,12 +25,21 @@ function toggleForm(disabled) {
 }
 
 function renderRecords(records) {
-  if (records.length === 0) {
+  if (!Array.isArray(records) || records.length === 0) {
     recordsContainer.innerHTML = "<p>No records decoded.</p>";
     return;
   }
 
-  const headers = ["id", "bytesUsed", "mnc", "dmcc", "cellId", "ip"];
+  const headers = [
+    "lineNumber",
+    "id",
+    "bytesUsed",
+    "mnc",
+    "dmcc",
+    "cellId",
+    "ip",
+    "rawLine",
+  ];
   const table = document.createElement("table");
   const thead = document.createElement("thead");
   const headerRow = document.createElement("tr");
@@ -47,7 +59,7 @@ function renderRecords(records) {
     const row = document.createElement("tr");
     headers.forEach((header) => {
       const td = document.createElement("td");
-      const value = record[header];
+      const value = record?.[header];
       td.textContent = value !== undefined && value !== null ? String(value) : "";
       row.append(td);
     });
@@ -60,7 +72,7 @@ function renderRecords(records) {
 }
 
 function renderErrors(errors) {
-  if (errors.length === 0) {
+  if (!Array.isArray(errors) || errors.length === 0) {
     errorsContainer.classList.add("hidden");
     errorList.innerHTML = "";
     return;
@@ -110,13 +122,22 @@ async function handleUpload(file) {
 
     const result = await response.json();
 
-    fileNameEl.textContent = result.fileName;
-    totalLinesEl.textContent = result.totalLines;
-    recordCountEl.textContent = result.records.length;
-    errorCountEl.textContent = result.errors.length;
+    const errors = Array.isArray(result.invalidRecords) ? result.invalidRecords : [];
+    const records = Array.isArray(result.records) ? result.records : [];
 
-    renderRecords(result.records);
-    renderErrors(result.errors);
+    fileNameEl.textContent = result.fileName;
+    fileIdEl.textContent =
+      result.fileId !== undefined ? String(result.fileId) : "—";
+    uploadedAtEl.textContent = result.uploadedAt
+      ? new Date(result.uploadedAt).toLocaleString()
+      : "—";
+    totalLinesEl.textContent = result.totalLines;
+    recordCountEl.textContent = records.length;
+    skippedLinesEl.textContent = result.skippedLines ?? 0;
+    errorCountEl.textContent = errors.length;
+
+    renderRecords(records);
+    renderErrors(errors);
 
     resultsSection.classList.remove("hidden");
     setStatus("File parsed successfully.", "success");

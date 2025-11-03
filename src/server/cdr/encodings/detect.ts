@@ -1,14 +1,14 @@
-import { EncodingType } from "./"
+import { EncodingType } from "./index";
 
 export function detectEncoding(line: string): EncodingType | undefined {
-  const pair = line.split(",", 2)
+  const pair = line.split(",", 2);
 
   if (pair.length != 2) {
-    return undefined
+    return undefined;
   }
 
-  const [idStr, data] = pair
-  const id = parseInt(idStr)
+  const [idStr] = pair;
+  const id = parseInt(idStr);
 
   if (isNaN(id)) {
     return undefined;

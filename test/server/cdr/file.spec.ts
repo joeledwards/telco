@@ -3,8 +3,8 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 
-import { decode } from "../../../src/api/cdr/decode";
-import { CDRRecord } from "../../../src/common/cdr";
+import { decode } from "../../../src/server/cdr/decode";
+import { CDRRecord } from "../../../src/server/cdr";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

@@ -1,4 +1,4 @@
-import { CDRRecord } from "../../../common/cdr";
+import { CDRRecord } from "../record";
 
 function decode(text: string): CDRRecord | undefined {
   const parts = text.split(",");
@@ -26,7 +26,7 @@ function decode(text: string): CDRRecord | undefined {
     undefined,
     undefined,
     undefined,
-    undefined,
+    undefined
   );
 }
 

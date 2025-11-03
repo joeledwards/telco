@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
-import { detectEncoding } from "../../../../src/api/cdr/encodings/detect";
-import { EncodingType } from "../../../../src/api/cdr/encodings";
+import { detectEncoding } from "../../../../src/server/cdr/encodings/detect";
+import { EncodingType } from "../../../../src/server/cdr/encodings";
 
 
 describe("detectEncoding", () => {

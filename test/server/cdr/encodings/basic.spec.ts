@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
-import basic from "../../../../src/api/cdr/encodings/basic";
-import { CDRRecord } from "../../../../src/common/cdr";
+import basic from "../../../../src/server/cdr/encodings/basic";
+import { CDRRecord } from "../../../../src/server/cdr";
 
 describe("basic encoding stubs", () => {
   it("returns the record for valid text", () => {

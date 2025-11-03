@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
-import extended from "../../../../src/api/cdr/encodings/extended";
-import { CDRRecord } from "../../../../src/common/cdr";
+import extended from "../../../../src/server/cdr/encodings/extended";
+import { CDRRecord } from "../../../../src/server/cdr";
 
 describe("extended encoding stubs", () => {
   it("returns the record for a valid line", () => {
