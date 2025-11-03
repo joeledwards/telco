@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CDR Upload</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header>
+      <h1>CDR Upload and Preview</h1>
+      <p>Select a call detail record file to parse and preview its contents.</p>
+    </header>
+
+    <main>
+      <section class="panel">
+        <form id="upload-form">
+          <div class="field">
+            <label for="file-input">Choose CDR file</label>
+            <input id="file-input" name="file" type="file" accept=".dat,.txt,.csv" required>
+          </div>
+          <button type="submit">Upload &amp; Parse</button>
+        </form>
+        <p id="status" class="status"></p>
+      </section>
+
+      <section id="results" class="panel results hidden">
+        <h2>Parsed Records</h2>
+        <div class="summary">
+          <p><strong>File:</strong> <span id="result-file"></span></p>
+          <p><strong>Total lines:</strong> <span id="result-lines"></span></p>
+          <p><strong>Parsed records:</strong> <span id="result-count"></span></p>
+          <p><strong>Unparsed lines:</strong> <span id="result-errors"></span></p>
+        </div>
+
+        <div id="records-container" class="table-wrapper"></div>
+
+        <div id="errors-container" class="errors hidden">
+          <h3>Unparsed Lines</h3>
+          <ul id="error-list"></ul>
+        </div>
+      </section>
+    </main>
+
+    <script src="/app.js" defer></script>
+  </body>
+</html>
