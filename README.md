@@ -45,7 +45,11 @@ OR
 npm run dev
 ```
 
-Open `http://localhost:3000` in your browser.
+Open:
+
+- `http://localhost:3000` – upload & preview
+- `http://localhost:3000/files.html` – browse uploaded files
+- `http://localhost:3000/records.html` – search decoded records (legacy `/search.html` redirects here)
 
 
 ## Test
@@ -77,7 +81,8 @@ docker compose up --build
 Once both services are healthy, browse to:
 
 - `http://localhost:3000` – upload + preview
-- `http://localhost:3000/search.html` – search UI
+- `http://localhost:3000/files.html` – file browser
+- `http://localhost:3000/records.html` – record search UI
 
 The Node container receives `DATABASE_URL=postgres://telco:telco@db:5432/telco`.
 

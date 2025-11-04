@@ -1,5 +1,3 @@
-const filesTableBody = document.getElementById("files-table-body");
-const refreshFilesBtn = document.getElementById("refresh-files");
 const fileSelect = document.getElementById("filter-file");
 const searchForm = document.getElementById("search-form");
 const clearSearchBtn = document.getElementById("clear-search");
@@ -14,7 +12,6 @@ const orderSelect = document.getElementById("filter-order");
 
 const state = {
   files: [],
-  fileMap: new Map(),
   limit: Number(limitSelect.value),
   offset: 0,
   total: undefined,
@@ -28,40 +25,6 @@ async function fetchJSON(url) {
     throw new Error(error.error || `Request failed with status ${response.status}`);
   }
   return response.json();
-}
-
-function formatDate(value) {
-  try {
-    return value ? new Date(value).toLocaleString() : "—";
-  } catch {
-    return value ?? "—";
-  }
-}
-
-function renderFiles(files) {
-  filesTableBody.innerHTML = "";
-  if (files.length === 0) {
-    const row = document.createElement("tr");
-    const cell = document.createElement("td");
-    cell.colSpan = 7;
-    cell.textContent = "No uploads yet.";
-    row.append(cell);
-    filesTableBody.append(row);
-    return;
-  }
-
-  files.forEach((file) => {
-    const row = document.createElement("tr");
-    row.innerHTML = `
-      <td>${file.id}</td>
-      <td>${file.fileName}</td>
-      <td>${formatDate(file.uploadedAt)}</td>
-      <td>${file.totalLines}</td>
-      <td>${file.parsedLines}</td>
-      <td>${file.skippedLines ?? 0}</td>
-      <td>${file.errorCount ?? 0}</td>`;
-    filesTableBody.append(row);
-  });
 }
 
 function populateFileSelect(files) {
@@ -78,20 +41,16 @@ function populateFileSelect(files) {
   }
 }
 
-async function loadFiles() {
-  refreshFilesBtn.disabled = true;
+async function loadFilesForFilter() {
   try {
     const data = await fetchJSON("/api/cdr/files?limit=200&orderBy=uploadedAt&direction=desc");
     const files = Array.isArray(data.files) ? data.files : [];
     state.files = files;
-    state.fileMap = new Map(files.map((file) => [file.id, file]));
-    renderFiles(files);
     populateFileSelect(files);
   } catch (err) {
     console.error(err);
-    renderFiles([]);
-  } finally {
-    refreshFilesBtn.disabled = false;
+    state.files = [];
+    populateFileSelect([]);
   }
 }
 
@@ -179,11 +138,7 @@ async function runSearch(offsetOverride) {
   const filters = offsetOverride === undefined ? parseFiltersFromForm() : state.lastFilters;
   state.lastFilters = filters;
   state.limit = Number(limitSelect.value) || 50;
-  if (offsetOverride === undefined) {
-    state.offset = 0;
-  } else {
-    state.offset = offsetOverride;
-  }
+  state.offset = offsetOverride === undefined ? 0 : offsetOverride;
 
   const query = buildSearchParams(filters, state.limit, state.offset);
 
@@ -227,20 +182,24 @@ function clearSearch() {
   paginationEl.hidden = true;
 }
 
-refreshFilesBtn.addEventListener("click", loadFiles);
 searchForm.addEventListener("submit", (event) => {
   event.preventDefault();
   runSearch();
 });
+
 clearSearchBtn.addEventListener("click", () => {
   clearSearch();
 });
+
 prevPageBtn.addEventListener("click", () => {
   const nextOffset = Math.max(0, state.offset - state.limit);
   runSearch(nextOffset);
 });
+
 nextPageBtn.addEventListener("click", () => {
   runSearch(state.offset + state.limit);
 });
 
-loadFiles().then(() => runSearch());
+loadFilesForFilter().finally(() => {
+  runSearch();
+});

@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CDR Records</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header>
+      <div class="header-content">
+        <div>
+          <h1>CDR Records</h1>
+          <p>Search decoded records by any field and page through the results.</p>
+        </div>
+        <nav class="primary-nav">
+          <a href="/">Upload</a>
+          <a href="/files.html">Files</a>
+          <a href="/records.html" class="active">Records</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="panel">
+        <h2>Search Records</h2>
+        <form id="search-form" class="search-form">
+          <label>
+            File
+            <select id="filter-file">
+              <option value="">All files</option>
+            </select>
+          </label>
+          <label>
+            CDR ID
+            <input type="number" id="filter-cdr" min="0" placeholder="e.g. 42">
+          </label>
+          <label>
+            MNC
+            <input type="number" id="filter-mnc" min="0" placeholder="e.g. 310">
+          </label>
+          <label>
+            DMCC
+            <input type="text" id="filter-dmcc" placeholder="e.g. 0d39f">
+          </label>
+          <label>
+            Cell ID
+            <input type="number" id="filter-cell" min="0" placeholder="e.g. 214">
+          </label>
+          <label>
+            IP
+            <input type="text" id="filter-ip" placeholder="e.g. 10.0.0.1">
+          </label>
+          <label class="wide">
+            Contains Text
+            <input type="text" id="filter-text" placeholder="Search raw line text">
+          </label>
+          <label>
+            Per Page
+            <select id="filter-limit">
+              <option value="25">25</option>
+              <option value="50" selected>50</option>
+              <option value="100">100</option>
+            </select>
+          </label>
+          <label>
+            Order By
+            <select id="filter-order">
+              <option value="createdAt">Newest first</option>
+              <option value="lineNumber">Line number</option>
+            </select>
+          </label>
+          <div class="search-actions">
+            <button type="submit">Search</button>
+            <button type="button" id="clear-search" class="btn btn--secondary">Clear</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel" id="records-panel">
+        <div class="panel-header">
+          <h2>Results</h2>
+          <p id="records-meta">No results yet.</p>
+        </div>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>File ID</th>
+                <th>Line</th>
+                <th>CDR ID</th>
+                <th>Bytes</th>
+                <th>MNC</th>
+                <th>DMCC</th>
+                <th>Cell ID</th>
+                <th>IP</th>
+                <th>Raw Line</th>
+              </tr>
+            </thead>
+            <tbody id="records-table-body">
+              <tr>
+                <td colspan="9">Use the form above to search records.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagination" id="pagination" hidden>
+          <button type="button" id="prev-page" disabled>&larr; Prev</button>
+          <span id="page-info"></span>
+          <button type="button" id="next-page" disabled>Next &rarr;</button>
+        </div>
+      </section>
+    </main>
+
+    <script src="/search.js" defer></script>
+  </body>
+</html>

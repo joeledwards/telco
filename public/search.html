@@ -2,142 +2,25 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="refresh" content="0; url=/records.html">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>CDR Search</title>
     <link rel="stylesheet" href="/styles.css">
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        window.location.replace("/records.html");
+      });
+    </script>
   </head>
   <body>
-    <header>
-      <div class="header-content">
-        <div>
-          <h1>CDR Search</h1>
-          <p>Browse uploaded files and search decoded records using any field.</p>
-        </div>
-        <nav class="primary-nav">
-          <a href="/">Upload</a>
-          <a href="/search.html" class="active">Search</a>
-        </nav>
-      </div>
-    </header>
-
-    <main>
-      <section class="panel" id="files-panel">
-        <div class="panel-header">
-          <h2>Uploaded Files</h2>
-          <button type="button" id="refresh-files">Refresh</button>
-        </div>
-        <div class="table-wrapper">
-          <table>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>File Name</th>
-                <th>Uploaded</th>
-                <th>Total Lines</th>
-                <th>Parsed</th>
-                <th>Skipped</th>
-                <th>Invalid</th>
-              </tr>
-            </thead>
-            <tbody id="files-table-body">
-              <tr>
-                <td colspan="7">No uploads yet.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section class="panel">
-        <h2>Search Records</h2>
-        <form id="search-form" class="search-form">
-          <label>
-            File
-            <select id="filter-file">
-              <option value="">All files</option>
-            </select>
-          </label>
-          <label>
-            CDR ID
-            <input type="number" id="filter-cdr" min="0" placeholder="e.g. 42">
-          </label>
-          <label>
-            MNC
-            <input type="number" id="filter-mnc" min="0" placeholder="e.g. 310">
-          </label>
-          <label>
-            DMCC
-            <input type="text" id="filter-dmcc" placeholder="e.g. 0d39f">
-          </label>
-          <label>
-            Cell ID
-            <input type="number" id="filter-cell" min="0" placeholder="e.g. 214">
-          </label>
-          <label>
-            IP
-            <input type="text" id="filter-ip" placeholder="e.g. 10.0.0.1">
-          </label>
-          <label class="wide">
-            Contains Text
-            <input type="text" id="filter-text" placeholder="Search raw line text">
-          </label>
-          <label>
-            Per Page
-            <select id="filter-limit">
-              <option value="25">25</option>
-              <option value="50" selected>50</option>
-              <option value="100">100</option>
-            </select>
-          </label>
-          <label>
-            Order By
-            <select id="filter-order">
-              <option value="createdAt">Newest first</option>
-              <option value="lineNumber">Line number</option>
-            </select>
-          </label>
-          <div class="search-actions">
-            <button type="submit">Search</button>
-            <button type="button" id="clear-search" class="secondary">Clear</button>
-          </div>
-        </form>
-      </section>
-
-      <section class="panel" id="records-panel">
-        <div class="panel-header">
-          <h2>Results</h2>
-          <p id="records-meta">No results yet.</p>
-        </div>
-        <div class="table-wrapper">
-          <table>
-            <thead>
-              <tr>
-                <th>File ID</th>
-                <th>Line</th>
-                <th>CDR ID</th>
-                <th>Bytes</th>
-                <th>MNC</th>
-                <th>DMCC</th>
-                <th>Cell ID</th>
-                <th>IP</th>
-                <th>Raw Line</th>
-              </tr>
-            </thead>
-            <tbody id="records-table-body">
-              <tr>
-                <td colspan="9">Use the form above to search records.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="pagination" id="pagination" hidden>
-          <button type="button" id="prev-page" disabled>&larr; Prev</button>
-          <span id="page-info"></span>
-          <button type="button" id="next-page" disabled>Next &rarr;</button>
-        </div>
-      </section>
+    <main class="panel" style="max-width: 720px; margin: 2rem auto;">
+      <h1>Search has moved</h1>
+      <p>
+        The combined search page is now split into
+        <a href="/files.html">files</a> and
+        <a href="/records.html">records</a>.
+      </p>
+      <p>You should be redirected automatically. If not, follow the links above.</p>
     </main>
-
-    <script src="/search.js" defer></script>
   </body>
 </html>

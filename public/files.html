@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CDR Files</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header>
+      <div class="header-content">
+        <div>
+          <h1>CDR Files</h1>
+          <p>Browse uploaded files, filter by name or ID, and jump into record searches.</p>
+        </div>
+        <nav class="primary-nav">
+          <a href="/">Upload</a>
+          <a href="/files.html" class="active">Files</a>
+          <a href="/records.html">Records</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Uploaded Files</h2>
+          <div class="search-actions">
+            <button type="button" id="refresh-files" class="btn">Refresh</button>
+            <a href="/records.html" class="btn btn--link">Search records</a>
+          </div>
+        </div>
+
+        <form id="file-filters" class="search-form">
+          <label class="wide">
+            Search
+            <input
+              type="text"
+              id="file-search"
+              placeholder="Filter by file name or ID"
+              autocomplete="off"
+            >
+          </label>
+          <label>
+            Order By
+            <select id="file-order">
+              <option value="uploadedAt" selected>Uploaded time</option>
+              <option value="fileName">File name</option>
+            </select>
+          </label>
+          <label>
+            Direction
+            <select id="file-direction">
+              <option value="desc" selected>Newest first</option>
+              <option value="asc">Oldest first</option>
+            </select>
+          </label>
+          <label>
+            Limit
+            <select id="file-limit">
+              <option value="50">50</option>
+              <option value="100">100</option>
+              <option value="200" selected>200</option>
+            </select>
+          </label>
+          <div class="search-actions">
+            <button type="submit">Apply</button>
+            <button type="button" id="clear-files" class="btn btn--secondary">Clear</button>
+          </div>
+        </form>
+
+        <p id="files-meta">Loading files…</p>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>File Name</th>
+                <th>Uploaded</th>
+                <th>Total Lines</th>
+                <th>Parsed</th>
+                <th>Skipped</th>
+                <th>Invalid</th>
+              </tr>
+            </thead>
+            <tbody id="files-table-body">
+              <tr>
+                <td colspan="7">Loading files…</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script src="/files.js" defer></script>
+  </body>
+</html>
