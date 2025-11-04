@@ -116,8 +116,3 @@ This is a very simple PoC. There are many changes I would make to make the syste
 - Metrics collection library
 - UI unit tests
 - End-to-end tests
-
-## Exercise Reference
-
-Full problem statement:
-https://www.notion.so/teamhologram/Full-Stack-Engineering-Exercise-24833577b6b680a38760ddc5729b5cff
