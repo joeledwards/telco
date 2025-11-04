@@ -24,9 +24,9 @@ describe("example CDR fixture", () => {
 
     expect(records).toEqual([
       new CDRRecord(4, 495594, 0, "0d39f", 214),
-      new CDRRecord(16, 12921, 48771, undefined, 0, "0.192.99.229"),
+      new CDRRecord(16, 12921, 48771, undefined, 192, "99.229.230.61"),
       new CDRRecord(9991, 2935),
-      new CDRRecord(316, 12921, 3721, undefined, 8823, "18.202.192.1"),
+      new CDRRecord(316, 12921, 3721, undefined, 578228938, "192.1.74.255"),
       new CDRRecord(7194, 495593, 394, "b33", 192),
       new CDRRecord(7291, 293451),
     ]);

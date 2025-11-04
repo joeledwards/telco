@@ -4,7 +4,7 @@ import { decode } from "../../../src/server/cdr/decode";
 import { CDRRecord } from "../../../src/server/cdr";
 
 
-describe("detectEncoding", () => {
+describe("decode", () => {
   function compare(text: string, record: CDRRecord) {
     const r = decode(text)
     if (r === undefined) {
@@ -22,7 +22,7 @@ describe("detectEncoding", () => {
   it("correctly detects and decodes valid records", () => {
     compare("2,1", new CDRRecord(2,1,undefined,undefined,undefined,undefined));
     compare("4,heyo,3,1,5", new CDRRecord(4,1,3,"heyo",5,undefined));
-    compare("6,00030001000501010101", new CDRRecord(6,1,3,undefined,5,"1.1.1.1"));
+    compare("6,000300010000000501010101", new CDRRecord(6,1,3,undefined,5,"1.1.1.1"));
   });
 
   it("returns undefined for invalid records", () => {

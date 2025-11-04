@@ -1,7 +1,8 @@
 import { describe, expect, it } from "vitest";
 
-import { detectEncoding } from "../../../../src/server/cdr/encodings/detect";
+import { detectEncoding, selectEncoding } from "../../../../src/server/cdr/encodings/detect";
 import { EncodingType } from "../../../../src/server/cdr/encodings";
+import { CDRRecord } from "../../../../src/server/cdr";
 
 
 describe("detectEncoding", () => {
@@ -37,5 +38,29 @@ describe("detectEncoding", () => {
     expect(detectEncoding("2.a")).toBeUndefined();
     expect(detectEncoding("4.a")).toBeUndefined();
     expect(detectEncoding("6.a")).toBeUndefined();
+  });
+});
+
+describe("selectEncoding", () => {
+  it("correctly selects extended encoding", () => {
+    expect(selectEncoding(new CDRRecord(4, 1))).toBe(EncodingType.Extended);
+    expect(selectEncoding(new CDRRecord(14, 1))).toBe(EncodingType.Extended);
+  });
+
+  it("correctly detects hex encoding", () => {
+    expect(selectEncoding(new CDRRecord(6, 1))).toBe(EncodingType.Hex);
+    expect(selectEncoding(new CDRRecord(16, 1))).toBe(EncodingType.Hex);
+  });
+
+  it("correctly detects extended encoding", () => {
+    expect(selectEncoding(new CDRRecord(0, 1))).toBe(EncodingType.Basic);
+    expect(selectEncoding(new CDRRecord(1, 1))).toBe(EncodingType.Basic);
+    expect(selectEncoding(new CDRRecord(2, 1))).toBe(EncodingType.Basic);
+    expect(selectEncoding(new CDRRecord(3, 1))).toBe(EncodingType.Basic);
+    expect(selectEncoding(new CDRRecord(5, 1))).toBe(EncodingType.Basic);
+    expect(selectEncoding(new CDRRecord(7, 1))).toBe(EncodingType.Basic);
+    expect(selectEncoding(new CDRRecord(8, 1))).toBe(EncodingType.Basic);
+    expect(selectEncoding(new CDRRecord(9, 1))).toBe(EncodingType.Basic);
+    expect(selectEncoding(new CDRRecord(10, 1))).toBe(EncodingType.Basic);
   });
 });

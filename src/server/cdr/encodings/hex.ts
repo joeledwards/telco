@@ -18,8 +18,8 @@ function decode(text: string): CDRRecord | undefined {
 
   const mnc = (buffer[0] << 8) | buffer[1];
   const bytesUsed = (buffer[2] << 8) | buffer[3];
-  const cellId = (buffer[4] << 8) | buffer[5];
-  const ip = `${buffer[6]}.${buffer[7]}.${buffer[8]}.${buffer[9]}`;
+  const cellId = (buffer[4] << 24) | (buffer[5] << 16) | (buffer[6] << 8) | buffer[7];
+  const ip = `${buffer[8]}.${buffer[9]}.${buffer[10]}.${buffer[11]}`;
 
   return new CDRRecord(id, bytesUsed, mnc, undefined, cellId, ip);
 }
@@ -28,9 +28,7 @@ function encode(record: CDRRecord): string | undefined {
   const buffer = Buffer.alloc(12);
 
   if (
-    record.id == null ||
     record.mnc == null ||
-    record.bytesUsed == null ||
     record.cellId == null ||
     record.ip == null
   ) {

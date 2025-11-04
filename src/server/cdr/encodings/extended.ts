@@ -13,7 +13,7 @@ function decode(text: string): CDRRecord | undefined {
   const bytesUsed = parseInt(bytesUsedStr);
   const cellId = parseInt(cellIdStr);
 
-  if (isNaN(id) || isNaN(mnc) || isNaN(bytesUsed) || isNaN(cellId)) {
+  if (isNaN(id) || isNaN(mnc) || isNaN(bytesUsed) || isNaN(cellId) || dmcc == null) {
     return undefined;
   }
 
@@ -21,6 +21,10 @@ function decode(text: string): CDRRecord | undefined {
 }
 
 function encode(record: CDRRecord): string | undefined {
+  if (record.mnc == null || record.cellId == null || record.dmcc == null) {
+    return undefined;
+  }
+
   return `${record.id},${record.dmcc},${record.mnc},${record.bytesUsed},${record.cellId}`;
 }
 

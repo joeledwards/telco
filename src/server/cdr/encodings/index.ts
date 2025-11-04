@@ -1,9 +1,8 @@
+import { CDRRecord } from "../record";
+import { detectEncoding, selectEncoding } from "./detect"
 import basic from "./basic";
 import extended from "./extended";
 import hex from "./hex";
-
-const encodings = { basic, extended, hex };
-type EncodingKey = keyof typeof encodings;
 
 export enum EncodingType {
   Basic = "basic",
@@ -11,12 +10,24 @@ export enum EncodingType {
   Hex = "hex",
 }
 
-export const encodingMap: Record<EncodingType, EncodingKey> = {
-  [EncodingType.Basic]: "basic",
-  [EncodingType.Extended]: "extended",
-  [EncodingType.Hex]: "hex",
-};
+export type Decoder = (text: string) => CDRRecord | undefined;
+export type Encoder = (record: CDRRecord) => string | undefined;
 
-export { basic, extended, hex };
-export type { EncodingKey };
-export default encodings;
+function getDecoder(type: EncodingType): Decoder {
+  switch (type) {
+    case EncodingType.Basic: return basic.decode
+    case EncodingType.Extended: return extended.decode
+    case EncodingType.Hex: return hex.decode
+  }
+}
+
+function getEncoder(type: EncodingType): Encoder {
+  switch (type) {
+    case EncodingType.Basic: return basic.encode
+    case EncodingType.Extended: return extended.encode
+    case EncodingType.Hex: return hex.encode
+  }
+}
+
+const encodings = { basic, extended, hex }
+export { encodings, detectEncoding, selectEncoding, getDecoder, getEncoder }
