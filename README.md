@@ -111,6 +111,7 @@ This is a very simple PoC. There are many changes I would make to make the syste
 - CDR encoder/decoder as an N-API addon written in C or Rust
 - Many validations and associated tests are missing for the CDR format
 - Batch insert queries for faster persistence of records to the database
+- Store IPs as INET type and support more advanced query methods (e.g. all IPs in a subnet)
 - Structured logging library
 - Metrics collection library
 - UI unit tests
