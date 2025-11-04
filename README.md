@@ -78,16 +78,10 @@ in a named volume so you can stop/start without losing state:
 docker compose up --build
 ```
 
-Once both services are healthy, browse to:
+Once both services are healthy, browse to `http://localhost:3000`
 
-- `http://localhost:3000` – upload + preview
-- `http://localhost:3000/files.html` – file browser
-- `http://localhost:3000/records.html` – record search UI
-
-The Node container receives `DATABASE_URL=postgres://telco:telco@db:5432/telco`.
-
-If you want to connect from your host tooling, use
-`postgres://telco:telco@localhost:5432/telco`.
+The Postgres connection string environment variable is supplied to the node container:
+`DATABASE_URL=postgres://telco:telco@db:5432/telco`
 
 ### Applying migrations manually
 
@@ -109,13 +103,21 @@ To reset everything, remove the named volume (`docker volume rm telco_postgres-d
 - `npm test` – keep unit tests green.
 - `docker compose up --build` – exercise the full stack against Postgres.
 
-## Roadmap
+## What is missing
 
-- Complete the basic / extended / hex encoders and decoders
-- Create the API server 
-- Provide a local Docker environment for end-to-end development (dev containers?)
-- Build a page for file upload
-- Build a page for record search and inspection
+This is a very simple PoC. There are many changes I would make to make the system production ready and improve its maintainability.
+
+- Switch from static pages to a component system based on React or Next.js
+- Use an ORM for entity management and persistence
+- Manage database schema via a migration utility (could be built in to the ORM)
+- Add users, authentication, and role based authorization
+- Streaming upload and parsing to support files of any size
+- Re-write parse as a C or Rust extension
+- Batch queries for faster persistence of records to the database
+- Structured logging library
+- Metrics collection library
+- UI unit tests
+- End-to-end tests
 
 ## Exercise Reference
 
