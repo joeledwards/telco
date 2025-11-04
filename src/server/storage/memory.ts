@@ -44,8 +44,12 @@ function matchesFilters(record: StoredRecord, filters: RecordFilters): boolean {
   if (filters.cellId !== undefined && record.cellId !== filters.cellId) {
     return false;
   }
-  if (filters.ip !== undefined && record.ip !== filters.ip) {
-    return false;
+  if (filters.ip !== undefined) {
+    const ipNeedle = filters.ip.toLowerCase();
+    const haystack = record.ip?.toLowerCase() ?? "";
+    if (!haystack.includes(ipNeedle)) {
+      return false;
+    }
   }
   if (filters.text) {
     const needle = filters.text.toLowerCase();

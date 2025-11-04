@@ -103,8 +103,8 @@ function buildRecordFilter(
     clauses.push(`cell_id = $${values.length}`);
   }
   if (filters.ip !== undefined) {
-    values.push(filters.ip);
-    clauses.push(`ip = $${values.length}`);
+    values.push(`%${filters.ip}%`);
+    clauses.push(`ip ILIKE $${values.length}`);
   }
   if (filters.text) {
     values.push(`%${filters.text}%`);
