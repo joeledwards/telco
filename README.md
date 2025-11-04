@@ -45,11 +45,7 @@ OR
 npm run dev
 ```
 
-Open:
-
-- `http://localhost:3000` – upload & preview
-- `http://localhost:3000/files.html` – browse uploaded files
-- `http://localhost:3000/records.html` – search decoded records (legacy `/search.html` redirects here)
+Open a web browser tab to: `http://localhost:3000`
 
 
 ## Test
@@ -78,7 +74,7 @@ in a named volume so you can stop/start without losing state:
 docker compose up --build
 ```
 
-Once both services are healthy, browse to `http://localhost:3000`
+Once both services are healthy, open a web browser tab to `http://localhost:3000`
 
 The Postgres connection string environment variable is supplied to the node container:
 `DATABASE_URL=postgres://telco:telco@db:5432/telco`
