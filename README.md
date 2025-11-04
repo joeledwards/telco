@@ -112,8 +112,9 @@ This is a very simple PoC. There are many changes I would make to make the syste
 - Manage database schema via a migration utility (could be built in to the ORM)
 - Add users, authentication, and role based authorization
 - Streaming upload and parsing to support files of any size
-- Re-write parse as a C or Rust extension
-- Batch queries for faster persistence of records to the database
+- CDR encoder/decoder as an N-API addon written in C or Rust
+- Many validations and associated tests are missing for the CDR format
+- Batch insert queries for faster persistence of records to the database
 - Structured logging library
 - Metrics collection library
 - UI unit tests
