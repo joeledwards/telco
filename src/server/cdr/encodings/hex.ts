@@ -16,10 +16,31 @@ function decode(text: string): CDRRecord | undefined {
 
   const buffer = Buffer.from(hexData, "hex");
 
+  let ipVersion: number;
+  if (buffer.byteLength === 12) {
+    ipVersion = 4;
+  } else if (buffer.byteLength === 24) {
+    ipVersion = 6;
+  } else {
+    return undefined
+  }
+
   const mnc = (buffer[0] << 8) | buffer[1];
   const bytesUsed = (buffer[2] << 8) | buffer[3];
   const cellId = (buffer[4] << 24) | (buffer[5] << 16) | (buffer[6] << 8) | buffer[7];
-  const ip = `${buffer[8]}.${buffer[9]}.${buffer[10]}.${buffer[11]}`;
+  let ip: string;
+
+  if (ipVersion === 4) {
+    ip = `${buffer[8]}.${buffer[9]}.${buffer[10]}.${buffer[11]}`;
+  } else {
+    let parts = []
+    for (let i = 8; i < 24; i += 2) {
+      // TODO: filter out the longest sequence of zeroes
+      const part = buffer.slice(i, i+2).toString('hex')
+      parts.push(part)
+    }
+    ip = parts.join(":")
+  }
 
   return new CDRRecord(id, bytesUsed, mnc, undefined, cellId, ip);
 }
